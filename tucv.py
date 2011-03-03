@@ -22,7 +22,7 @@ class resdegree(Command):
     args = '[description] degree major date'
 
 class resemployer(Command):
-    args = '[description] name'
+    args = '[description] name location'
 
 class resjob(Command):
     args = '[description] title startdate enddate'
