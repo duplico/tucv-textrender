@@ -15,8 +15,12 @@ class Renderer(Renderer):
         space_col = ' ' * sep
         left_width = 80 - RIGHT_COLUMN_WIDTH - sep - indent
         print 'printing l', type(left), 'r', type(right)
+        i_indent = ' ' * indent
+        if indent == 0:
+            i_indent = 'o '
+            indent = 2
         left_col = textwrap.wrap(left,
-                                 width=left_width, initial_indent=' '*indent,
+                                 width=left_width, initial_indent=i_indent,
                                  subsequent_indent=' '*indent)
         right_col = textwrap.wrap(right,
                                   width=RIGHT_COLUMN_WIDTH)
@@ -46,7 +50,7 @@ class Renderer(Renderer):
         if node.attributes['indent']:
             spacing = 2
         return self.text_entry_two_col(left, right,
-                                       indent=1)
+                                       indent=0)
     
     def ressubentry(self, node):
         return self.text_entry_two_col(unicode(node.attributes['lefttext']),
@@ -70,7 +74,7 @@ class Renderer(Renderer):
         school_string = unicode(node.attributes['name'])
         rendered_school_string = self.text_entry_two_col(school_string,
                                        unicode(node.attributes['location']),
-                                       indent=1)
+                                       indent=0)
         if 'description' in node.attributes and node.attributes['description']:
             rendered_school_string += self.text_entry_one_col(unicode(node.attributes['description']), indent=3)
         return rendered_school_string
@@ -83,9 +87,9 @@ class Renderer(Renderer):
         print 'and', unicode(node.attributes['date'])
         rendered_text = self.text_entry_two_col(left_side,
                                        unicode(node.attributes['date']),
-                                       indent=1)
+                                       indent=3)
         if 'description' in node.attributes and node.attributes['description']:
-            rendered_text += self.text_entry_one_col(unicode(node.attributes['description']), indent=3)
+            rendered_text += self.text_entry_one_col(unicode(node.attributes['description']), indent=4)
         return rendered_text
         pass # Date major description degree
     
@@ -93,7 +97,7 @@ class Renderer(Renderer):
         left_side = unicode(node.attributes['name'])
         rendered_text = self.text_entry_two_col(left_side,
                                        unicode(node.attributes['location']),
-                                       indent=1)
+                                       indent=0)
         if 'description' in node.attributes and node.attributes['description']:
             rendered_text += self.text_entry_one_col(unicode(node.attributes['description']), indent=3)
         return rendered_text
